@@ -1,0 +1,29 @@
+<% var data = {
+  title: "Заголовок | Проект",
+  author: "Blazhko"
+}; %>
+<%= _.template(require('./../includes/header.html'))(data) %>
+
+<div id="app">
+  Hello form Vue {{ cartTotal }} :)
+  <br>
+  Data field: {{ txt }}
+</div>
+
+<div class="test-wrap">
+  <div class="test">
+    Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Которой над взобравшись
+    дорогу рыбными свой деревни, парадигматическая она сбить даль щеке! Прямо мир агенство о предложения буквенных
+    Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Которой над взобравшись
+    дорогу рыбными свой деревни, парадигматическая она сбить даль щеке! Прямо мир агенство о предложения буквенных
+    реторический это.
+  </div>
+</div>
+
+<div class="cont">
+  <div><img src="img/1.jpg" alt="Alt"></div>
+  <div><img src="img/2.jpg" alt="Alt"></div>
+  <div><img src="img/3.jpg" alt="Alt"></div>
+</div>
+
+<%= _.template(require('./../includes/footer.html'))(data) %>

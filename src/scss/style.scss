@@ -1,0 +1,110 @@
+@import "libs";
+@import "fonts";
+@import "vars";
+@import "mixins";
+
+body{
+  font-family: $ff-text;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+html{
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after{
+  box-sizing: border-box;
+}
+*{
+  min-height: 0;
+  min-width: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  margin: 0;
+}
+
+ul,
+li,
+ol{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+p{
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+audio,
+canvas,
+iframe,
+img,
+svg,
+video{
+  vertical-align: middle;
+}
+
+textarea{
+  resize: none;
+}
+
+input,
+select,
+textarea{
+  color: $second-color;
+  font-family: $ff-text;
+  outline: none;
+}
+
+.clearfix{
+  &:after{
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.icon-spinner{
+  font-size: 10rem;
+  &.red_mod{
+    color: red;
+  }
+}
+
+@import "responsive";
+
+body{
+  background-color: $second-color;
+}
+
+.test-wrap{
+  @include size(500px,900px);
+  background-color: yellow;
+  background-image: url(../img/1.jpg);
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+}
+
+.test{
+  @include absolute-all(20px);
+  font-size: rem(33);
+
+  &:hover{
+    background-color: blue;
+  }
+}
