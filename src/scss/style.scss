@@ -1,24 +1,26 @@
 @import "libs";
 @import "fonts";
+@import "sprite";
 @import "vars";
 @import "mixins";
 
-body{
+body {
   font-family: $ff-text;
   font-size: 1rem;
   line-height: 1.2;
 }
 
-html{
+html {
   box-sizing: border-box;
 }
 
 *,
 *:before,
-*:after{
+*:after {
   box-sizing: border-box;
 }
-*{
+
+* {
   min-height: 0;
   min-width: 0;
 }
@@ -28,23 +30,23 @@ h2,
 h3,
 h4,
 h5,
-h6{
+h6 {
   margin: 0;
 }
 
 ul,
 li,
-ol{
+ol {
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-p{
+p {
   margin: 0;
 }
 
-a{
+a {
   text-decoration: none;
   color: black;
 }
@@ -54,57 +56,69 @@ canvas,
 iframe,
 img,
 svg,
-video{
+video {
   vertical-align: middle;
 }
 
-textarea{
+textarea {
   resize: none;
 }
 
 input,
 select,
-textarea{
+textarea {
   color: $second-color;
   font-family: $ff-text;
   outline: none;
 }
 
-.clearfix{
-  &:after{
+.clearfix {
+  &:after {
     content: "";
     display: table;
     clear: both;
   }
 }
 
-.icon-spinner{
+.icon-spinner {
   font-size: 10rem;
-  &.red_mod{
+  &.red_mod {
     color: red;
   }
 }
 
 @import "responsive";
 
-body{
+body {
   background-color: $second-color;
 }
 
-.test-wrap{
-  @include size(500px,900px);
-  background-color: yellow;
-  background-image: url(../img/1.jpg);
+.svg {
+  width: 50px;
+  height: 50px;
+  svg {
+    width: inherit;
+    height: inherit;
+  }
+}
+
+.test-wrap {
+  @include size(500px, 900px);
+  background-color: yellow; // background-image: url(../img/svg/spritemap.svg#sprite-pumpkin);
+  // @include sprite('pumpkin');
+  background-image: url(map-get($sprites, 'pumpkin'));
+  background-position: bottom;
+  background-repeat: no-repeat;
   position: relative;
   margin: 0 auto;
   display: flex;
 }
 
-.test{
+.test {
   @include absolute-all(20px);
   font-size: rem(33);
 
-  &:hover{
+  &:hover {
     background-color: blue;
   }
 }

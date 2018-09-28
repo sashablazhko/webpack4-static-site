@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const SVGSpritemapPlugin = require('svg-spritemap-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
@@ -20,13 +22,14 @@ function generateHtmlPlugins(templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/html/views');
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   entry: ['./src/js/index.js', './src/scss/style.scss'],
   output: {
     filename: './js/bundle.js',
   },
-  devtool: 'source-map',
+  devtool: isProduction ? '' : 'source-map',
   module: {
     rules: [
       {
@@ -98,6 +101,15 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: './css/style.bundle.css',
     }),
+    new SVGSpritemapPlugin({
+      src: './src/svgbeforesprite/**/*.svg',
+      filename: './img/svg/spritemap.svg',
+      gutter: 0,
+      generateTitle: false,
+      generateUse: false,
+      svg4everybody: true,
+      styles: './src/scss/_sprite.scss',
+    }),
     new CopyWebpackPlugin([
       {
         from: './src/fonts',
@@ -118,3 +130,12 @@ module.exports = {
     ]),
   ].concat(htmlPlugins),
 };
+
+if (isProduction) {
+  module.exports.plugins.push(
+    new ImageminPlugin({
+      from: 'img/',
+      test: /\.(png|jpe?g|gif|svg)$/i,
+    })
+  );
+}
