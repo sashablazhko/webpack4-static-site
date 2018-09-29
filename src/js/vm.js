@@ -24,4 +24,7 @@ let vm = new Vue({
   },
 });
 
-module.exports = vm;
+let test = () => console.log('test');
+
+// module.exports = { vm, test };
+export { vm, test };

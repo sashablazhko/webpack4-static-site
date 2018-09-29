@@ -104,7 +104,7 @@ body {
 
 .test-wrap {
   @include size(500px, 900px);
-  background-color: yellow; // background-image: url(../img/svg/spritemap.svg#sprite-pumpkin);
+  background-color: pink; // background-image: url(../img/svg/spritemap.svg#sprite-pumpkin);
   // @include sprite('pumpkin');
   background-image: url(map-get($sprites, 'pumpkin'));
   background-position: bottom;

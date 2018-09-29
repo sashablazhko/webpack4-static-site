@@ -7,6 +7,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const fs = require('fs');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 function generateHtmlPlugins(templateDir) {
   const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
   return templateFiles.map(item => {
@@ -22,12 +24,21 @@ function generateHtmlPlugins(templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/html/views');
-const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: ['./src/js/index.js', './src/scss/style.scss'],
+  context: path.resolve(__dirname, 'src'),
+  entry: ['./scss/style.scss', './js/index.js'],
   output: {
     filename: './js/bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+  },
+  devServer: {
+    host: 'localhost', // default
+    port: '8080', // default
+    contentBase: [__dirname + '/src/html/views', __dirname + '/src/html/includes'],
+    hot: true,
+    watchContentBase: true,
   },
   devtool: isProduction ? '' : 'source-map',
   module: {
@@ -54,6 +65,9 @@ module.exports = {
         test: /\.(sass|scss)$/,
         include: path.resolve(__dirname, 'src/scss'),
         use: [
+          {
+            loader: 'css-hot-loader',
+          },
           {
             loader: MiniCssExtractPlugin.loader,
             options: {},
@@ -112,22 +126,23 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: './src/fonts',
+        from: './fonts',
         to: './fonts',
       },
       {
-        from: './src/favicon',
+        from: './favicon',
         to: './favicon',
       },
       {
-        from: './src/img',
+        from: './img',
         to: './img',
       },
       {
-        from: './src/uploads',
+        from: './uploads',
         to: './uploads',
       },
     ]),
+    new webpack.HotModuleReplacementPlugin(),
   ].concat(htmlPlugins),
 };
 

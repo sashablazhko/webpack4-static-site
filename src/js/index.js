@@ -21,5 +21,7 @@ $(document).ready(() => {
   $('.cont').slick();
 });
 
-require('expose-loader?vm!./vm');
+// require('expose-loader?vm!./vm');
+import { vm, test } from './vm';
 vm.txt = 'ffuuuue';
+test();
